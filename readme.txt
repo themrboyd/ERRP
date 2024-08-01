@@ -1,7 +1,7 @@
 === ERRP: Enhanced Related Random Posts ===
 Contributors: mrboydwp
-Donate link: https://ko-fi.com/boyduang, https://buymeacoffee.com/boyduang
-Tags: related posts, random posts, content discovery, user engagement, SEO optimization, WordPress plugin, similar posts, content recommendation
+Donate link: https://ko-fi.com/boyduang
+Tags: related posts, random posts, content discovery, SEO, engagement
 Requires at least: 5.0
 Tested up to: 6.4.2
 Stable tag: 2.0.0
@@ -118,7 +118,7 @@ This is a major update with significant improvements in functionality, performan
 
 == Development ==
 
-For plugin development, bug reports, and feature requests, visit the [GitHub repository](https://github.com/themrboyd/errp-enhanced-related-random-posts).
+For plugin development, bug reports, and feature requests, visit the [GitHub repository](https://github.com/themrboyd/ERRP).
 
 == License ==
 
