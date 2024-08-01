@@ -3,9 +3,9 @@ Contributors: mrboydwp
 Donate link: https://ko-fi.com/boyduang, https://buymeacoffee.com/boyduang
 Tags: related posts, random posts, content discovery, user engagement, SEO optimization, WordPress plugin, similar posts, content recommendation
 Requires at least: 5.0
-Tested up to: 6.6.1
+Tested up to: 6.4.2
 Stable tag: 2.0.0
-Requires PHP: 5.6
+Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,8 +24,14 @@ ERRP: Enhanced Related Random Posts is a powerful WordPress plugin designed to i
 * Responsive design for seamless mobile integration
 * Performance-optimized with smart caching mechanisms
 * Easy-to-use shortcodes for flexible implementation
+* Multi-language support with translation-ready strings
 
 Whether you're a blogger looking to keep visitors on your site longer, an e-commerce store wanting to showcase more products, or a news site aiming to increase page views, ERRP provides the tools you need with the simplicity you desire.
+
+**Quick Example:**
+[errp_enhanced_posts type="related" layout="grid" show_image="true" show_excerpt="true"]
+
+This shortcode will display related posts in a grid layout with featured images and excerpts.
 
 If you find this plugin useful, consider supporting its development:
 * [Buy me a coffee](https://buymeacoffee.com/boyduang)
@@ -38,6 +44,8 @@ Your support helps maintain and improve ERRP for the entire WordPress community!
 1. Upload the plugin files to the `/wp-content/plugins/errp-enhanced-related-random-posts` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Navigate to the "ERRP: Enhanced Related Random Posts" settings in your WordPress dashboard to configure the plugin.
+4. Configure initial settings such as display type, number of posts, and layout preferences.
+5. Add the shortcode `[errp_enhanced_posts]` to your posts or pages where you want related or random posts to appear.
 
 == Frequently Asked Questions ==
 
@@ -47,7 +55,8 @@ You can use either of these shortcodes to display related or random posts in you
 * `[errp_easy_related_random_posts]` (legacy shortcode)
 * `[errp_enhanced_posts]` (new shortcode)
 
-Simply add the shortcode to the content editor where you want the posts to appear.
+Simply add the shortcode to the content editor where you want the posts to appear. For example:
+[errp_enhanced_posts type="random" limit="5" layout="list"]
 
 = Can I customize the appearance and behavior of the related or random posts section? =
 
@@ -69,7 +78,11 @@ ERRP enhances your site's SEO by:
 
 = Is the plugin compatible with my theme and other plugins? =
 
-ERRP is designed to be compatible with most WordPress themes and plugins. It uses WordPress core functions and follows best practices to ensure wide compatibility.
+ERRP is designed to be compatible with most WordPress themes and plugins. It uses WordPress core functions and follows best practices to ensure wide compatibility. However, if you encounter any issues, please report them on our GitHub repository.
+
+= Does ERRP support multiple languages? =
+
+Yes, ERRP is translation-ready. All user-facing strings can be translated into your preferred language.
 
 == Screenshots ==
 
@@ -84,12 +97,16 @@ ERRP is designed to be compatible with most WordPress themes and plugins. It use
 
 = 2.0.0 =
 * Major update: Renamed to "ERRP: Enhanced Related Random Posts"
-* Added new shortcode `[errp_enhanced_posts]`
-* Improved content matching algorithm for better relevance
-* Enhanced SEO optimization features
-* Added responsive grid layout option
-* Implemented advanced caching mechanism for better performance
-* Updated user interface for easier configuration
+* Added new shortcode `[errp_enhanced_posts]` for more flexibility
+* Improved content matching algorithm for better relevance in related posts
+* Enhanced SEO optimization features with improved internal linking
+* Added responsive grid layout option for modern, mobile-friendly designs
+* Implemented advanced caching mechanism for better performance, including separate caches for related and random posts
+* Updated user interface for easier configuration with color customization options
+* Introduced new options for handling posts without featured images
+* Improved compatibility with latest WordPress version (6.4.2)
+* Added support for custom CSS to allow further design customization
+* Implemented nonce checks and improved security measures
 
 = 1.0 =
 * Initial release of the Easy Related Random Posts plugin.
@@ -97,7 +114,7 @@ ERRP is designed to be compatible with most WordPress themes and plugins. It use
 == Upgrade Notice ==
 
 = 2.0.0 =
-This is a major update with significant improvements in functionality, performance, and SEO optimization. Please review your settings after updating.
+This is a major update with significant improvements in functionality, performance, and SEO optimization. New features include a grid layout, advanced caching, and more customization options. Please review your settings after updating.
 
 == Development ==
 
@@ -106,4 +123,3 @@ For plugin development, bug reports, and feature requests, visit the [GitHub rep
 == License ==
 
 This plugin is released under the [GNU General Public License, Version 2](https://www.gnu.org/licenses/gpl-2.0.html).
-

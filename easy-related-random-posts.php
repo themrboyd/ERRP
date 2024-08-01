@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Shortcode to display related or random posts
 function errp_related_random_posts_shortcode($atts) {
+
     $options = get_option('errp_settings', array());
     
     // Get settings or use defaults
@@ -141,41 +142,45 @@ function errp_get_related_posts($post_id, $limit) {
     $related_posts = get_transient($cache_key);
 
     if (false === $related_posts || $cache_time == 0) {
-        $categories = wp_get_post_categories($post_id, array('fields' => 'ids'));
-        $tags = wp_get_post_tags($post_id, array('fields' => 'ids'));
+        try {
+            $categories = wp_get_post_categories($post_id, array('fields' => 'ids'));
+            $tags = wp_get_post_tags($post_id, array('fields' => 'ids'));
 
-        $args = array(
-            'post_type' => 'post',
-            'posts_per_page' => $limit,
-            'post__not_in' => array($post_id),
-            'tax_query' => array(
-                'relation' => 'OR',
-                array(
-                    'taxonomy' => 'category',
-                    'field' => 'term_id',
-                    'terms' => $categories,
-                    'include_children' => false
+            $args = array(
+                'post_type' => 'post',
+                'posts_per_page' => $limit,
+                'post__not_in' => array($post_id),
+                'tax_query' => array(
+                    'relation' => 'OR',
+                    array(
+                        'taxonomy' => 'category',
+                        'field' => 'term_id',
+                        'terms' => $categories,
+                        'include_children' => false
+                    ),
+                    array(
+                        'taxonomy' => 'post_tag',
+                        'field' => 'term_id',
+                        'terms' => $tags
+                    )
                 ),
-                array(
-                    'taxonomy' => 'post_tag',
-                    'field' => 'term_id',
-                    'terms' => $tags
-                )
-            ),
-            'orderby' => 'rand',
-            'no_found_rows' => true,
-            'update_post_term_cache' => false,
-            'update_post_meta_cache' => false,
-        );
+                'orderby' => 'rand',
+                'no_found_rows' => true,
+                'update_post_term_cache' => false,
+                'update_post_meta_cache' => false,
+            );
 
-        // Add filter for query args
-        $args = apply_filters('errp_related_posts_query_args', $args, $post_id, $limit);
+            $args = apply_filters('errp_related_posts_query_args', $args, $post_id, $limit);
 
-        $query = new WP_Query($args);
-        $related_posts = $query->posts;
+            $query = new WP_Query($args);
+            $related_posts = $query->posts;
 
-        if ($cache_time > 0) {
-            set_transient($cache_key, $related_posts, $cache_time);
+            if ($cache_time > 0) {
+                set_transient($cache_key, $related_posts, $cache_time);
+            }
+        } catch (Exception $e) {
+            error_log('ERRP Error: ' . $e->getMessage());
+            return array();
         }
     }
 
@@ -206,12 +211,23 @@ function errp_get_post_thumbnail($post_id, $no_image_handling) {
             case 'hide':
                 $thumbnail_class = 'errp-hide-image';
                 break;
+            default:
+                $thumbnail_content = __('No image available', 'errp');
         }
     }
 
-    return "<div class='{$thumbnail_class}'>{$thumbnail_content}</div>";
+    return sprintf('<div class="%s">%s</div>', esc_attr($thumbnail_class), $thumbnail_content);
 }
-// Get custom excerpt
+/**
+ * Get custom excerpt for a post.
+ *
+ * This function retrieves a custom excerpt for a given post. If the post has an excerpt,
+ * it uses that. Otherwise, it generates an excerpt from the post content.
+ *
+ * @param int $post_id The ID of the post.
+ * @param int $length The desired length of the excerpt in words. Default is 55.
+ * @return string The custom excerpt.
+ */
 function errp_get_custom_excerpt($post_id, $length = 55) {
     $post = get_post($post_id);
     if (!$post) {
@@ -562,6 +578,7 @@ function errp_cache_time_field_callback() {
 add_action('admin_init', 'errp_handle_cache_clearing');
 
 function errp_handle_cache_clearing() {
+    
     if (isset($_POST['clear_cache']) && check_admin_referer('clear_cache_nonce', 'clear_cache_nonce')) {
         global $wpdb;
         $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_errp_%' OR option_name LIKE '_transient_timeout_errp_%'");
