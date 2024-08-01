@@ -1,9 +1,9 @@
 === ERRP: Enhanced Related Random Posts ===
 Contributors: mrboydwp
 Donate link: https://ko-fi.com/boyduang
-Tags: related posts, random posts, content discovery, SEO, engagement
+Tags:random posts, related posts, content discovery, SEO, engagement
 Requires at least: 5.0
-Tested up to: 6.4.2
+Tested up to: 6.6.1
 Stable tag: 2.0.0
 Requires PHP: 7.2
 License: GPLv2 or later
