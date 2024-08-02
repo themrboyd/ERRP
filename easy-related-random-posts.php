@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Plugin Name: ERRP: Enhanced Related Random Posts
  * Description: An enhanced plugin for displaying related or random posts to improve user engagement and content discovery.
  * Version:           2.0.0
- * Requires at least: 5.6
+ * Requires at least: 6
  * Requires PHP:      7.2
  * Author:            Boyd Duang
  * Author URI:        https://profiles.wordpress.org/mrboydwp/
